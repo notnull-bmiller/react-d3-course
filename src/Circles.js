@@ -13,7 +13,7 @@ const Circles = ({ width, height }) => {
     const rScale = scaleLinear().domain([0, 1]).range([0, maxRadius]);
     const colorScale = scaleOrdinal()
       .domain(range(5))
-      .range(["red", "blue", "green", "yellow", "orange"]);
+      .range(["steelblue", "blue", "brown", "yellow", "orange"]);
 
     select(svgRef.current)
       .selectAll("circle")
@@ -24,14 +24,6 @@ const Circles = ({ width, height }) => {
       .attr("cy", (d) => yScale(d.y))
       .attr("r", (d) => rScale(d.r))
       .attr("fill", (d) => colorScale(d.color));
-
-    select(svgRef.current)
-      .selectAll("rect")
-      .data(data)
-      .transition()
-      .duration(1000)
-
-      .attr("fill", (d) => colorScale(d.color));
   }, [data, width, height]);
 
   return (
@@ -39,9 +31,6 @@ const Circles = ({ width, height }) => {
       <svg ref={svgRef} viewBox={`0 0 ${width} ${height}`} className="circles">
         {data.map((d, i) => (
           <circle />
-        ))}
-        {data.map((d, i) => (
-          <rect />
         ))}
       </svg>
       <div>
